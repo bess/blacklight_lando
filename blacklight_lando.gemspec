@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.email = ["bess.sadler@princeton.edu"]
 
   spec.summary = "Configure a blacklight application to use lando for local development"
-  spec.description = "Configure a blacklight application to use lando for local 
-    development. Lando will spin up a docker container with two instances of solr, 
+  spec.description = "Configure a blacklight application to use lando for local
+    development. Lando will spin up a docker container with two instances of solr,
     one for development and one for testing."
   spec.homepage = "https://github.com/bess/blacklight_lando"
   spec.required_ruby_version = ">= 2.7.0"
@@ -33,8 +33,11 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "blacklight", ">= 7.0"
+
+  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "generator_spec"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

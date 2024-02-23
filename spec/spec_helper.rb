@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "blacklight_lando"
+require "generator_spec"
+require "byebug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
