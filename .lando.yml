@@ -1,0 +1,20 @@
+---
+name: search_app
+services:
+  test_solr:
+    type: solr:8.4
+    portforward: true
+    core: blacklight-core-test
+    config:
+      dir: "solr/conf"
+  development_solr:
+    type: solr:8.4
+    portforward: true
+    core: blacklight-core-dev
+    config:
+      dir: "solr/conf"
+proxy:
+  test_solr:
+    - blacklight.test.solr.lndo.site:8983
+  development_solr:
+    - blacklight.dev.solr.lndo.site:8983
