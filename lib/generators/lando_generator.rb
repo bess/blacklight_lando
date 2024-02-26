@@ -18,8 +18,7 @@ module BlacklightLando
 
     def create_lando_config
       copy_file ".lando.yml"
-      copy_file "lando_env.rb", "config/lando_env.rb"
-      # gsub_file 'config/application.rb', /require \"rails/all\"/, 'require "rails/all"\nrequire_relative "lando_env"'
+      copy_file "lando_env.rb", "config/initializers/lando_env.rb"
     end
   end
 end
