@@ -1,5 +1,5 @@
 ---
-name: search_app
+name: blacklight
 services:
   test_solr:
     type: solr:8.4
@@ -13,6 +13,9 @@ services:
     core: blacklight-core-dev
     config:
       dir: "solr/conf"
+  database:
+    type: postgres:15
+    portforward: true
 proxy:
   test_solr:
     - blacklight.test.solr.lndo.site:8983
