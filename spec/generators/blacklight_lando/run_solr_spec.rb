@@ -28,7 +28,6 @@ RSpec.describe BlacklightLando::RunSolr, type: :generator do
       end
       directory "config" do
         file "blacklight.yml"
-        file "database.yml"
       end
       file ".lando.yml"
     }
