@@ -42,7 +42,7 @@ RSpec.describe BlacklightLando::RunSolr, type: :generator do
       allow_any_instance_of(Object).to receive(:`).and_return(lando_info) # rubocop:disable RSpec/AnyInstance
     end
 
-    it "sets expected environment variables" do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    it "sets expected environment variables" do # rubocop:disable RSpec/MultipleExpectations
       require File.expand_path("../../../lib/generators/templates/lando_env.rb", __dir__)
       expect(ENV["lando_test_solr"]).to match(/blacklight-core-test/)
       expect(ENV["lando_development_solr"]).to match(/blacklight-core-dev/)
