@@ -13,7 +13,6 @@ module BlacklightLando
         1. Adds .lando.yml to your application
         2. Adds lando_env.rb to your application and includes it in application.rb
         3. Copies lando-configured config/blacklight.yml into your application
-        4. Copies lando-configured config/database.yml into your application
     EOF
     # rubocop:enable Naming/HeredocDelimiterNaming
 
@@ -21,7 +20,6 @@ module BlacklightLando
       copy_file ".lando_solr.yml", ".lando.yml"
       copy_file "lando_env.rb", "config/initializers/lando_env.rb"
       copy_file "blacklight.yml", "config/blacklight.yml"
-      copy_file "database.yml", "config/database.yml"
     end
   end
 end
