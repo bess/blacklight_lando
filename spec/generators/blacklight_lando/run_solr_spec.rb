@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "generators/lando_generator"
+require "generators/run_solr"
 require "fileutils"
 
 TMP_DIR = File.expand_path("../tmp", __dir__)
 
-RSpec.describe BlacklightLando::LandoGenerator, type: :generator do
+RSpec.describe BlacklightLando::RunSolr, type: :generator do
   destination TMP_DIR
   let(:pristine_gemfile) { File.join(BlacklightLando.root, "spec/fixtures/Gemfile") }
   let(:env) { double("env") } # rubocop:disable RSpec/VerifiedDoubles

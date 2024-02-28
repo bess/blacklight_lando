@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "blacklight_lando/version"
-require_relative "generators/lando_generator"
+require_relative "generators/run_solr"
 
 # Configure a Blacklight application to use Lando for Solr and Postresql
 module BlacklightLando

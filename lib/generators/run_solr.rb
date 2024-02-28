@@ -3,7 +3,7 @@
 require "rails/generators"
 module BlacklightLando
   # Generator for adding lando to a blacklight application
-  class LandoGenerator < Rails::Generators::Base
+  class RunSolr < Rails::Generators::Base
     source_root ::File.expand_path("templates", __dir__)
 
     # rubocop:disable Naming/HeredocDelimiterNaming
