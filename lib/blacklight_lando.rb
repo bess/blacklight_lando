@@ -2,6 +2,7 @@
 
 require_relative "blacklight_lando/version"
 require_relative "generators/run_solr"
+require_relative "generators/run_solr_and_postgresql"
 
 # Configure a Blacklight application to use Lando for Solr and Postresql
 module BlacklightLando

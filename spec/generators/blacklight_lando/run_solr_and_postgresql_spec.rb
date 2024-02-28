@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "generators/run_solr"
+require "generators/run_solr_and_postgresql"
 require "fileutils"
 
 TMP_DIR = File.expand_path("../tmp", __dir__)
 
-RSpec.describe BlacklightLando::RunSolr, type: :generator do
+RSpec.describe BlacklightLando::RunSolrAndPostgresql, type: :generator do
   destination TMP_DIR
   let(:pristine_gemfile) { File.join(BlacklightLando.root, "spec/fixtures/Gemfile") }
   let(:env) { double("env") } # rubocop:disable RSpec/VerifiedDoubles
@@ -34,6 +34,14 @@ RSpec.describe BlacklightLando::RunSolr, type: :generator do
     }
   end
 
+  context "when requiring new gems" do
+    it "adds them to the Gemfile" do # rubocop:disable RSpec/MultipleExpectations
+      expect(File.read(File.join(TMP_DIR, "Gemfile"))).not_to match(/gem .pg./)
+      run_generator
+      expect(File.read(File.join(TMP_DIR, "Gemfile"))).to match(/gem .pg./)
+    end
+  end
+
   context "when setting environment variables" do
     let(:lando_info) { File.read(File.join(BlacklightLando.root, "spec/fixtures/lando_info.json")) }
 
@@ -46,6 +54,9 @@ RSpec.describe BlacklightLando::RunSolr, type: :generator do
       require File.expand_path("../../../lib/generators/templates/lando_env.rb", __dir__)
       expect(ENV["lando_test_solr"]).to match(/blacklight-core-test/)
       expect(ENV["lando_development_solr"]).to match(/blacklight-core-dev/)
+      expect(ENV["lando_database_creds_database"]).to eq("database")
+      expect(ENV["lando_database_creds_username"]).to eq nil
+      expect(ENV["lando_database_creds_password"]).to eq ""
     end
   end
 end
