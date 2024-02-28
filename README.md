@@ -9,13 +9,14 @@ This gem creates a [Lando](https://lando.dev/) config file for running [Solr](ht
 ## Installation
 1. Add this gem to the `Gemfile` of your Blacklight application:
    ```
-   gem "blacklight_lando", "~> 0.2"
+   gem "blacklight_lando", "~> 0.3"
    ```
 2. Run `bundle install`
-3. Run `rails generate blacklight_lando:lando`
+3. Run `rails generate blacklight_lando:run_solr`
 4. Start lando: `lando start`
 5. Start blacklight as normal: `bundle exec rails s`
 
+Your application should now be running against the instance of solr that lando is running in a docker container.
 
 ## Usage
 
