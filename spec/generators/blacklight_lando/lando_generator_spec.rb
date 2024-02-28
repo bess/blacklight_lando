@@ -4,13 +4,20 @@ require "spec_helper"
 require "generators/lando_generator"
 require "fileutils"
 
-TMP_FILE = File.expand_path("../tmp", __dir__)
+TMP_DIR = File.expand_path("../tmp", __dir__)
 
 RSpec.describe BlacklightLando::LandoGenerator, type: :generator do
-  destination TMP_FILE
+  destination TMP_DIR
+  let(:pristine_gemfile) { File.join(BlacklightLando.root, "spec/fixtures/Gemfile") }
+  let(:env) { double("env") } # rubocop:disable RSpec/VerifiedDoubles
+
   before do
-    FileUtils.rm_rf(TMP_FILE)
+    FileUtils.rm_rf(TMP_DIR)
     prepare_destination
+    FileUtils.cp(pristine_gemfile, File.join(TMP_DIR, "Gemfile"))
+    allow(Rails).to receive(:env).and_return(env)
+    allow(env).to receive(:development?).and_return(true)
+    allow(env).to receive(:test?).and_return(true)
   end
 
   it "makes expected files" do # rubocop:disable RSpec/ExampleLength
@@ -27,13 +34,18 @@ RSpec.describe BlacklightLando::LandoGenerator, type: :generator do
     }
   end
 
+  context "when requiring new gems" do
+    it "adds them to the Gemfile" do # rubocop:disable RSpec/MultipleExpectations
+      expect(File.read(File.join(TMP_DIR, "Gemfile"))).not_to match(/gem .pg./)
+      run_generator
+      expect(File.read(File.join(TMP_DIR, "Gemfile"))).to match(/gem .pg./)
+    end
+  end
+
   context "when setting environment variables" do
-    let(:env) { double("env") } # rubocop:disable RSpec/VerifiedDoubles
     let(:lando_info) { File.read(File.join(BlacklightLando.root, "spec/fixtures/lando_info.json")) }
 
     before do
-      allow(Rails).to receive(:env).and_return(env)
-      allow(env).to receive(:development?).and_return(true)
       # Lando is not installed in CI, so stub any backtick calls
       allow_any_instance_of(Object).to receive(:`).and_return(lando_info) # rubocop:disable RSpec/AnyInstance
     end

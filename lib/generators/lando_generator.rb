@@ -16,6 +16,21 @@ module BlacklightLando
     EOF
     # rubocop:enable Naming/HeredocDelimiterNaming
 
+    # Add postgres gem to Gemfile
+    def add_pg_gem
+      gem "pg"
+    end
+
+    def bundle_install
+      return if Rails.env.test?
+
+      inside destination_root do
+        Bundler.with_unbundled_env do
+          run "bundle install"
+        end
+      end
+    end
+
     def create_lando_config
       copy_file ".lando.yml"
       copy_file "lando_env.rb", "config/initializers/lando_env.rb"
