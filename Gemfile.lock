@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blacklight_lando (0.3.0)
+    blacklight_lando (0.3.1)
       blacklight (>= 7.0)
 
 GEM
