@@ -6,3 +6,6 @@
 
 ## [0.2.0] - 2024-02-21
  - Add postgresql
+
+## [0.2.1] - 2024-02-21
+ - Add pg gem to Gemfile
